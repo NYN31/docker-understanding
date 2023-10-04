@@ -26,3 +26,4 @@ dist-ssr
 .env_local
 .env_prod
 .env_test
+note-frontend/

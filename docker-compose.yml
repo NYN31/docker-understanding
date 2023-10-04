@@ -1,4 +1,4 @@
-version: "3.8"
+version: '3.8'
 
 services:
   app:
@@ -7,4 +7,8 @@ services:
     build:
       context: .
     ports:
-      - "3000:3000"
+      - '3000:3000'
+    volumes:
+      - /home/noyon_admin/self/personal-js/note-frontend:/app
+volumes:
+    note-frontend:
