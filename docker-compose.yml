@@ -2,9 +2,11 @@ version: "3.8"
 
 services:
   app:
-    container_name: note-app
-    image: note-app
+    container_name: note-app-nginx
+    image: note-app-nginx
     build:
       context: .
     ports:
-      - "3000:3000"
+      - 8080:80
+volumes:
+    note-frontend:
