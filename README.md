@@ -3,49 +3,38 @@ This project was bootstrapped with [vite](https://github.com/vitejs/vite).
 
 ### `Available Scripts for`
 <ul>
-    <li>locally run</li>
-    <li>manually dockerize and</li>
-    <li>dockerize with docker-compose file</li>
+    <li>build a docker image with a node and nginx</li>
 </ul>
 
-<h2>1. Locally Run The Project</h2>
-In the project directory, you can run the following two command sequensially for locally run the project:
+<h3>Step 1:</h3> Build application
 
-### `1. yarn`
+### `yarn run build`
 
-### `2. yarn run dev`
+<h3>Step 2:</h3> Build docker image through Dockerfile
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### `docker build . -t note-app-nginx`
 
-The page will reload if you make edits.<br />
+Dokcer file steps <br />
+    # `Download a node image` <br />
+    # `Donwload a nginx image`
 
-<h2>2. Dockerize with nginx manually</h2>
+<h3>Step 3:</h3> Build docker image through Dockerfile
 
-### Build application
- `yarn run build` <br />
-<b>NOTE: a /dist folder will be created</b>
+### `docker run --name nginx-server1 -p 8080:80 note-app-nginx`
 
-### Docker build image
- `docker build -t note-app-nginx` 
+<h3>Step 4:</h3> Enter into container and make a /app directory into root folder
 
-### Docker run container
- `docker run -it -p 3000:3000 note-app-nginx`
+### `mkdir /app`
 
-Runs the app. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<h3>Step 5:<h3> Go to the project folder directory and copy /dist folder into container /app folder using below command.
 
-<h2>3. Dockerize with docker compose file</h2>
+### `docker cp $(pwd)/dist/ <container_id or container_name>:/app`
 
-### Build application
-`yarn run build`  
+<h3>Step 6:</h3> Then Copy all the file of /app/dist folder into /usr/share/nginx/html file
 
-### Docker compose run container
-`docker-compose up` 
+### `cp -r /app/dist/* /usr/share/nginx/html/`
 
-### Docker compose run container in detached mode
-`docker-compose up -d`
+<h3>Step 7:</h3> Run the application at localhost:8080 in browser.
 
-### Docker compose check running container status
-`docker ps`
 
-Runs the app. Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
+
